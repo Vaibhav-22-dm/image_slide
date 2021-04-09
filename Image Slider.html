@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel-container {
+            width: 700px;
+            /* height: 780px; */
+            border: 2px solid rgb(99, 97, 97);
+            border-radius: 20px;
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+            background-color: rgb(99, 97, 97);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+        }
+
+        #carousel-slide {
+
+            width: 700px;
+            height: 460px;
+        }
+
+        @media(max-width : "720px"){
+            .carousel-container, #carousel-slide {
+                width: 90vw;
+                margin: auto;
+            }
+        }
+        .image-list {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+            margin-top: 30px;
+            background-color: grey;
+            box-sizing: border-box;
+
+        }
+
+        #img2 {
+            background-color: rgb(242, 239, 248);
+            padding: 10px;
+        }
+
+        .bottom_img {
+            width: 17%;
+            height: 120px;
+            padding: 10px;
+        }
+
+        .button-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        button {
+            padding: 3px;
+            background: transparent;
+            color: white;
+            font-size: 35px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            width: 50px;
+            border: none;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            color: red;
+        }
+
+        button:focus {
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel-container">
+        <div id="carousel-slide">
+            <img src="img/Ant-Man.png" alt="error" id="image" height="500px" width="280px">
+        </div>
+        <div class="image-list">
+            <img src="img/DeadPool.png" alt="" height="50px" class="bottom_img" id="img1">
+            <img src="img/Ant-Man.png" alt="" height="50px" class="bottom_img" id="img2">
+            <img src="img/SpiderMan.png" alt="" height="50px" class="bottom_img" id="img3">
+            <img src="img/Thor.png" alt="" height="50px" class="bottom_img" id="img4">
+        </div>
+        <div class="button-container">
+            <button id="prevBtn" onclick="prvFn()">
+                <</button>
+                    <button id="nextBtn" onclick="nxtFn()">></button>
+        </div>
+    </div>
+
+
+
+</body>
+<script>
+    var counter = 0;
+    var image = document.getElementById('image');
+    var images = [
+        "img/Ant-Man.png",
+        "img/DeadPool.png",
+        "img/SpiderMan.png",
+        "img/Thor.png"];
+
+
+    function slide() {
+        if (counter == 0) {
+            document.getElementById('img1').src = images[3];
+            document.getElementById('img2').src = images[0];
+            document.getElementById('img3').src = images[1];
+            document.getElementById('img4').src = images[2]
+        }
+
+        if (counter == 1) {
+            document.getElementById('img1').src = images[0];
+            document.getElementById('img2').src = images[1];
+            document.getElementById('img3').src = images[2];
+            document.getElementById('img4').src = images[3]
+        }
+
+
+        if (counter == 2) {
+            document.getElementById('img1').src = images[1];
+            document.getElementById('img2').src = images[2];
+            document.getElementById('img3').src = images[3];
+            document.getElementById('img4').src = images[0]
+        }
+
+        if (counter == 3) {
+            document.getElementById('img1').src = images[2];
+            document.getElementById('img2').src = images[3];
+            document.getElementById('img3').src = images[0];
+            document.getElementById('img4').src = images[1]
+        }
+
+    }
+    function nxtFn() {
+        counter++;
+        if (counter > 3) {
+            counter = 0;
+            image.src = images[counter];
+        } else {
+            image.src = images[counter];
+        }
+        slide();
+    }
+
+    function prvFn() {
+        counter--;
+        if (counter < 0) {
+            counter = 3;
+            image.src = images[counter];
+        } else {
+            image.src = images[counter];
+        }
+        slide();
+
+    }
+
+    function matchCounter(){
+        for ( var j = 0; j < 4; j++) {
+            if (image.src == images[j]) {
+                counter = j;
+            }
+        };
+        console.log(counter);
+    }
+
+    document.getElementById("img1").addEventListener('click', () => {
+        image.src = document.getElementById('img1').src;
+        matchCounter();
+        slide();
+        
+    });
+
+    document.getElementById("img2").addEventListener('click', () => {
+        image.src = document.getElementById('img2').src;
+        matchCounter();
+        slide();
+    });
+
+
+    document.getElementById("img3").addEventListener('click', () => {
+        image.src = document.getElementById('img3').src;
+        matchCounter();
+        slide();
+        
+    });
+
+    document.getElementById("img4").addEventListener('click', () => {
+        image.src = document.getElementById('img4').src;
+        matchCounter();
+        slide();
+    });
+
+    
+
+
+
+
+
+</script>
+
+</html>
